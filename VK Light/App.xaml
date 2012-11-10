@@ -1,0 +1,31 @@
+﻿<Application
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"       
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="VK_Light.App"
+    xmlns:UriMapper="clr-namespace:System.Windows.Navigation;assembly=Microsoft.Phone"
+    xmlns:myconverers="clr-namespace:VK_Light.Converters"
+    xmlns:mybinders="clr-namespace:VK_Light.Binders">
+    <!--Ресурсы приложения-->
+    <Application.Resources>
+        <!-- Отвечает за начальную навигацию(если пользователь зерегистрирован то происходит переход на сообщения)-->
+        <UriMapper:UriMapper x:Name="mapper">
+            <UriMapper:UriMapping Uri="/Login.xaml" />
+        </UriMapper:UriMapper>
+        <!-- локализация приложения -->
+        <local:LocalizedStrings xmlns:local="clr-namespace:VK_Light" x:Key="LocalizedStrings" />
+        
+        <!-- (mvvm подход) для задания нужного нам отображения. Пример - чат -->
+        <mybinders:Binder x:Key="Binder"/>
+        <myconverers:MessageConverter x:Key="MType"/>
+
+    </Application.Resources>
+
+    <Application.ApplicationLifetimeObjects>
+        <!--Обязательный объект, обрабатывающий события времени жизни приложения-->
+        <shell:PhoneApplicationService 
+            Launching="Application_Launching" Closing="Application_Closing" 
+            Activated="Application_Activated" Deactivated="Application_Deactivated"/>
+    </Application.ApplicationLifetimeObjects>
+
+</Application>

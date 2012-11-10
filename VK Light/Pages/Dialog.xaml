@@ -1,0 +1,70 @@
+﻿<phone:PhoneApplicationPage
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    
+    xmlns:c4f="clr-namespace:Coding4Fun.Phone.Controls;assembly=Coding4Fun.Phone.Controls"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit" 
+    x:Class="VK_Light.Pages.Dialog"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
+    shell:SystemTray.IsVisible="True">
+
+    <!--LayoutRoot представляет корневую сетку, где размещается все содержимое страницы-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="90"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="70"/>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel содержит имя приложения и заголовок страницы-->
+        <StackPanel x:Name="TitlePanel" Margin="12,17,0,10" Grid.Row="0">
+            <TextBlock x:Name="ApplicationTitle" Text="{Binding Name}" Style="{StaticResource PhoneTextNormalStyle}" FontSize="30" FontFamily="Segoe WP Semibold"/>
+            <TextBlock x:Name="PageTitle" Text="{Binding Status}" Style="{StaticResource PhoneTextTitle1Style}" FontSize="20" Opacity="0.595" FontFamily="Segoe WP Semibold"/>
+        </StackPanel>
+            <ListBox Name="listBox1" Grid.Row="1" SelectionMode="Multiple" ItemsSource="{Binding Path=Instance.Messages,Source={StaticResource Binder}}" Height="500" DisplayMemberPath="{Binding}" Margin="0,7,0,0">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                <Grid Width="430" Margin="12,10,0,10" Name="dialogShow" Tap="dialogShow_Tap" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <c4f:ChatBubble  Width="300"
+							    HorizontalAlignment="{Binding Converter={StaticResource MType},ConverterParameter=align}"
+                                Opacity="{Binding Converter={StaticResource MType}}"
+                                ChatBubbleDirection="{Binding Converter={StaticResource MType},ConverterParameter=direction}" >
+                        <c4f:ChatBubble.Background>
+                            <SolidColorBrush Color="{StaticResource PhoneAccentColor}"/>
+                        </c4f:ChatBubble.Background>
+                        <StackPanel Width="280">
+                            <TextBlock TextWrapping="Wrap" Text="{Binding Body}" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            <TextBlock Text="{Binding DateString}" VerticalAlignment="Bottom" HorizontalAlignment="Right" />
+                        </StackPanel>
+                    </c4f:ChatBubble>
+                </Grid>
+                    </DataTemplate>
+               </ListBox.ItemTemplate>
+               </ListBox>
+        
+            <c4f:ChatBubbleTextBox Grid.Row="2" Name="textSend" TextWrapping="Wrap" Text="введите сообщение" Width="340"   VerticalAlignment="Bottom" HorizontalAlignment="Right" ChatBubbleDirection="LowerRight" Foreground="#86000000" GotFocus="textSend_GotFocus" KeyUp="textSend_KeyUp" />
+            
+    </Grid>
+ 
+    <!--Пример кода, иллюстрирующий использование ApplicationBar-->
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton IconUri="/Components/Appbar_Icons/appbar.send.text.rest.png" Text="отправить" IsEnabled="False"/>
+            <shell:ApplicationBarIconButton IconUri="/icons/appbar.feature.camera.rest.png" Text="прикрепить снимок"/>
+			<shell:ApplicationBarIconButton IconUri="/icons/appbar.checkin.rest.png" Text="Прикрепить карту"/>
+			<shell:ApplicationBarIconButton IconUri="/Components/Appbar_Icons/appbar.manage.rest.png" Text="выбрать"/>
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="Удалить диалог"/>
+            </shell:ApplicationBar.MenuItems>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
+</phone:PhoneApplicationPage>

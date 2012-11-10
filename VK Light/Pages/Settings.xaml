@@ -1,0 +1,50 @@
+﻿<phone:PhoneApplicationPage 
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+	xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	
+	mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
+	x:Class="VK_Light.Settings"
+	FontFamily="{StaticResource PhoneFontFamilyNormal}"
+	FontSize="{StaticResource PhoneFontSizeNormal}"
+	Foreground="{StaticResource PhoneForegroundBrush}"
+	Orientation="Portrait"
+	shell:SystemTray.IsVisible="True">
+
+	<!--LayoutRoot is the root grid where all page content is placed-->
+	<StackPanel x:Name="LayoutRoot" Background="Transparent">
+<!--TitlePanel contains the name of the application and page title-->
+		<StackPanel x:Name="TitlePanel" Height="64">
+			<TextBlock x:Name="ApplicationTitle" Text="настройки" FontSize="30" FontFamily="Segoe WP Semibold" Style="{StaticResource PhoneTextNormalStyle}" Margin="24,0,12,0" />
+		</StackPanel>
+		<ScrollViewer Height="552">
+			<StackPanel Margin="12,0,12,208" Grid.Row="1">
+				<StackPanel Margin="0,0,8,0" Orientation="Horizontal" d:LayoutOverrides="Width">
+					<StackPanel>
+						<TextBlock TextWrapping="Wrap" Text="Изменить фотографию" FontSize="24" Opacity="0.6" Margin="12,0,0,0"/>
+						<TextBlock TextWrapping="Wrap" Text="Кликните на фотографии для смены" FontSize="16" Margin="12,10,0,0"/>
+					</StackPanel>
+					<Image Width="100" Height="100" Margin="70,0,0,0"/>
+				</StackPanel>
+				<toolkit:ToggleSwitch  Header="Звук" Margin="0,0,8,0" d:LayoutOverrides="GridBox"/>
+				<toolkit:ToggleSwitch  Header="Вибрация" Margin="0,0,8,0"/>
+				<toolkit:ToggleSwitch  Header="Всплывающая строка" Margin="0,0,8,0"/>
+				<StackPanel>
+					<TextBlock Text="push-уведомления" Margin="12,0,0,0"/>
+					<Button Content="не беспокоить в течение часа"/>
+					<Button Content="не беспокоить 8 часов"/>
+					<TextBlock TextWrapping="Wrap" Text="Звуковые уведомления отключены до"/>
+					<Button Content="отмена"/>
+				</StackPanel>
+			</StackPanel>
+		</ScrollViewer>
+		<StackPanel Height="208" VerticalAlignment="Bottom">
+			<TextBlock TextWrapping="Wrap" Text="аккаунт" FontSize="24" Opacity="0.595" Margin="24,20,0,0"/>
+			<Button Name="buttonExit" Content="выйти" HorizontalAlignment="Left" Width="180" Margin="12,0,0,0" Click="buttonExit_Click" />
+		</StackPanel>
+	</StackPanel>
+</phone:PhoneApplicationPage>

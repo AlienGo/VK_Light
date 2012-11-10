@@ -1,0 +1,97 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="VK_Light.Registration"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:controls="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
+    OrientationChanged="PhoneApplicationPage_OrientationChanged"
+    shell:SystemTray.IsVisible="True">
+    
+    
+    <!--LayoutRoot представляет корневую сетку, где размещается все содержимое страницы-->
+    
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Image Grid.Row="1" HorizontalAlignment="Left" Margin="24,10,0,10" Name="imageLogotype" Stretch="None" VerticalAlignment="Top" Source="/VK%20Light;component/Components/VK_logotype.png" />
+        <!--Элемент управления Pivot-->
+        <controls:Pivot Margin="0,24,0,0">
+            <!--Первый элемент Pivot-->
+
+            <controls:PivotItem Margin="12,0">
+                <controls:PivotItem.Header>
+                    <Grid>
+                        <TextBlock Name="RegPiv" FontSize="48" Text="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.registration}" />
+                    </Grid>
+                </controls:PivotItem.Header>
+                <ScrollViewer>
+                    <StackPanel HorizontalAlignment="Stretch" Margin="0,28,0,0" Name="Begin" VerticalAlignment="Top">
+                        <TextBlock Name="phoneBlock" Text="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.phone_number}" FontSize="20" VerticalAlignment="Stretch" Padding="12,0,0,0" FontFamily="Segoe WP Semibold" Opacity="0.6" />
+                        <TextBox Name="phonenumBox" LostFocus="phonenumBox_LostFocus" MaxLength="20" Width="450" HorizontalAlignment="Left" GotFocus="phonenumBox_GotFocus">
+                            <!-- здесь задается режим для ввода номера-->
+                            <TextBox.InputScope>
+                                <InputScope>
+                                    <InputScopeName NameValue="TelephoneCountryCode"/>
+                                </InputScope>
+                            </TextBox.InputScope>
+                        </TextBox>
+                        <TextBlock FontSize="20" Name="firstnameBlock" Padding="12,0,0,0" Text="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.first_name}" FontFamily="Segoe WP Semibold" Opacity="0.6" />
+                        <TextBox Name="firstnameBox" HorizontalAlignment="Left" Width="450" GotFocus="firstnameBox_GotFocus" LostFocus="firstnameBox_LostFocus" />
+                        <TextBlock FontSize="20" Name="lastnameBlock" Padding="12,0,0,0" Text="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.last_name}" FontFamily="Segoe WP Semibold" Opacity="0.6" />
+                        <TextBox Name="lastnameBox" Width="450" HorizontalAlignment="Left" GotFocus="lastnameBox_GotFocus" LostFocus="lastnameBox_LostFocus" />
+                        <Button Content="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.registration}" Name="buttonRegistration" IsEnabled="False" HorizontalAlignment="Left" Click="buttonRegistration_Click" />
+                    </StackPanel>
+                </ScrollViewer> 
+            </controls:PivotItem>
+
+            <!--Второй элемент Pivot-->
+            <controls:PivotItem >
+                <controls:PivotItem.Header>
+                    <Grid>
+                        <TextBlock Name="ConfPiv" FontSize="48" Text="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.confirm}" />
+                    </Grid>
+                </controls:PivotItem.Header>
+                <ScrollViewer>
+                    <StackPanel Name="Confirm">
+                        <TextBlock Name="phoneConfirmBlock" Text="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.phone_number}" FontSize="20" VerticalAlignment="Stretch" Padding="12,0,0,0" FontFamily="Segoe WP Semibold" Foreground="White" Opacity="0.6" />
+                        <TextBox Name="phoneConfirmBox" MaxLength="20" LostFocus="phoneConfirmBox_LostFocus" Width="450" HorizontalAlignment="Left" GotFocus="phoneConfirmBox_GotFocus">
+                            <!-- здесь задается режим для ввода номера-->
+                            <TextBox.InputScope>
+                                <InputScope>
+                                    <InputScopeName NameValue="TelephoneCountryCode"/>
+                                </InputScope>
+                            </TextBox.InputScope>
+                        </TextBox>
+                        <TextBlock Name="CodeBlock" Text="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.sms_code}" FontSize="20" VerticalAlignment="Stretch" Padding="12,0,0,0" FontFamily="Segoe WP Semibold" Opacity="0.6" />
+                        <TextBox Name="CodeBox" MaxLength="20" LostFocus="CodeBox_LostFocus" HorizontalAlignment="Left" Width="450" GotFocus="CodeBox_GotFocus" />
+                        <TextBlock Height="30" Name="passwordBlock" Text="Введите пароль"  FontSize="20" VerticalAlignment="Stretch" Padding="12,0,0,0" FontFamily="Segoe WP Semibold" Opacity="0.6" />
+                        <PasswordBox Height="72" Name="passwordBox" LostFocus="passwordBox_LostFocus" HorizontalAlignment="Left" Width="450" GotFocus="passwordBox_GotFocus" />
+                        <TextBlock Height="30" Name="passwordConfirmBlock" Text="Подтвердите пароль" FontSize="20" VerticalAlignment="Stretch" Padding="12,0,0,0" FontFamily="Segoe WP Semibold" Opacity="0.6" />
+                        <PasswordBox Height="72" Name="passwordConfirmBox" LostFocus="passwordConfirmBox_LostFocus" HorizontalAlignment="Left" Width="450" GotFocus="passwordConfirmBox_GotFocus" />
+                        <Button Content="{Binding Source={StaticResource LocalizedStrings}, Path=LocalizedResources.confirm}" Name="buttonConfirm" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FlowDirection="LeftToRight" Margin="0" HorizontalAlignment="Left" IsEnabled="False" Click="buttonConfirm_Click" />
+                    </StackPanel>
+                </ScrollViewer>
+            </controls:PivotItem>
+        </controls:Pivot>
+        
+    </Grid>
+
+    <!--Пример кода, иллюстрирующий использование ApplicationBar-->
+    <!--<phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton x:Name="appbar_button1" IconUri="/Images/appbar_button1.png" Text="Кнопка 1"/>
+            <shell:ApplicationBarIconButton x:Name="appbar_button2" IconUri="/Images/appbar_button2.png" Text="Кнопка 2"/>
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem x:Name="menuItem1" Text="Элемент меню 1"/>
+                <shell:ApplicationBarMenuItem x:Name="menuItem2" Text="Элемент меню 2"/>
+            </shell:ApplicationBar.MenuItems>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>-->
+    
+</phone:PhoneApplicationPage>
